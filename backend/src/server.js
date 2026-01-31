@@ -1,31 +1,44 @@
 const express = require('express');
-const app = express();
-
+const http = require('http');
 const cors = require('cors');
-
-// load environment variables
 require('dotenv').config();
+
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-// connect to the database
+// DB
 const configDB = require('./config/db');
 configDB();
 
-// middlewares
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// sample route
+// Routes
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
 });
 
-// all routes
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/utils', require('./routes/utils.routes'));
+app.use('/api/chat', require('./routes/chat.routes'));
 
-// start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+// SOCKET.IO SETUP
+const server = http.createServer(app);
+
+const { Server } = require('socket.io');
+const io = new Server(server, {
+  cors: {
+    origin: "*", // restrict later
+    methods: ["GET", "POST"]
+  }
+});
+
+// Attach socket logic
+require('./sockets/chat.socket')(io);
+
+// Start server
+server.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
