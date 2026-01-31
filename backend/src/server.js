@@ -23,6 +23,7 @@ app.get('/api/hello', (req, res) => {
 
 // all routes
 app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/utils', require('./routes/utils.routes'));
 
 // start the server
 app.listen(PORT, () => {

@@ -1,0 +1,37 @@
+const skill_preset = [
+    'Web Development',
+    'Data Science',
+    'Machine Learning',
+    'Mobile Development',
+    'Cloud Computing',
+    'Cybersecurity',
+    'DevOps',
+    'UI/UX Design',
+    'Project Management',
+    'Digital Marketing',
+    'Blockchain',
+    'Artificial Intelligence',
+    'Internet of Things',
+    'Game Development',
+    'Software Testing',
+    'Music',
+    'Photography',
+    'Writing',
+    'Public Speaking',
+    'Leadership',
+    'Time Management',
+    'Critical Thinking',
+    'Problem Solving',
+    'Teamwork',
+    'Adaptability',
+    'Creativity',
+    'Emotional Intelligence',
+    'Networking',
+    'Research',
+    'Data Analysis',
+    'Foreign Languages',
+]
+
+exports.getSkillPreset = (req, res) => {
+    res.status(200).json({ skills: skill_preset });
+};
