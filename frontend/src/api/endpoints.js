@@ -6,7 +6,7 @@ const endpoints = {
   createUser: `${baseUrl}/users`,
   updateUser: (id) => `${baseUrl}/users/${id}`,
   deleteUser: (id) => `${baseUrl}/users/${id}`,
-  getRecommendations: `${baseUrl}/recommendations`,
+  getRecommendations: `${baseUrl}/utils/recommendations`,
   getProfile: `${baseUrl}/auth/profile`,
   getSkills: `${baseUrl}/utils/skills`,
   register: `${baseUrl}/auth/register`,
